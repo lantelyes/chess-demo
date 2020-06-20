@@ -1,4 +1,4 @@
-const { BOARD, COORDINATE_MAP } = require('./constants');
+const { BOARD, COORDINATE_MAP } = require('../constants');
 const { isString } = require('util');
 
 const getAvailableMoves = (coordinates) => {
@@ -31,7 +31,7 @@ const getAvailableMoves = (coordinates) => {
 const convertToNumericCoordinates = (coordinates) => {
   const [row, column] = coordinates.split('');
 
-  return [COORDINATE_MAP[row], Number(column)];
+  return [COORDINATE_MAP[row], Number(column) - 1];
 };
 
 // Validate the chessboard coordinates
@@ -43,7 +43,13 @@ const validateCordinates = (coordinates) => {
 
   const regex = new RegExp(`^[A-${columnUpperBound}][1-${rowUpperBound}]`);
 
-  return isString(coordinates) && regex.test(coordinates);
+  return (
+    isString(coordinates) && coordinates.length === 2 && regex.test(coordinates)
+  );
 };
 
-module.exports = { getAvailableMoves, validateCordinates };
+module.exports = {
+  getAvailableMoves,
+  convertToNumericCoordinates,
+  validateCordinates,
+};
