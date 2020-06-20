@@ -16,4 +16,6 @@ const COORDINATE_MAP = {
   H: 7,
 };
 
-module.exports = { BOARD, COORDINATE_MAP, SERVER_PORT };
+const DB_NAME = 'aetest';
+
+module.exports = { BOARD, COORDINATE_MAP, SERVER_PORT, DB_NAME };
