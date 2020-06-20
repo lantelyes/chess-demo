@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "nodemon": "^2.0.4"
+  },
+  "name": "aedemo-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-eslint": "10.1.0",
+    "eslint": "7.3.0",
+    "eslint-config-last": "0.0.5",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "prettier": "2.0.5"
+  },
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "yarn eslint .",
+    "lint:fix": "yarn lint --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
