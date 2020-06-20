@@ -1,4 +1,4 @@
-const { getAvailableMoves, validateCordinates } = require('../utils');
+const { getAvailableMoves, validateCordinates } = require('./utils');
 
 const initRouter = (app) => {
   app.get('/moves/:coordinates', function (req, res) {
@@ -14,4 +14,4 @@ const initRouter = (app) => {
   });
 };
 
-module.exports = initRouter();
+module.exports = { initRouter };
