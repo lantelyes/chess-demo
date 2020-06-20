@@ -13,11 +13,12 @@
     "eslint-config-last": "0.0.5",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
+    "jest": "^26.0.1",
     "prettier": "2.0.5"
   },
   "scripts": {
     "start": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "yarn eslint .",
     "lint:fix": "yarn lint --fix"
   },
