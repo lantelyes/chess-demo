@@ -15,19 +15,18 @@ const SessionNotFounndMessage = styled.div`
 const SessionView = () => {
   const { currentSession } = useSession();
 
-  if (currentSession) {
-    console.log(currentSession.moves);
-  }
+  //Display moves with most recent first
+  const moves = get(currentSession, 'moves', []);
 
   return (
     <Card style={{ width: 300, height: '100%', maxHeight: 400 }}>
       <Card.Header as="h5">
-        {currentSession ? `Session: ${currentSession.name} ` : 'Session'}
+        {currentSession ? `Session: ${currentSession.name}` : 'Session'}
       </Card.Header>
       <Card.Body style={{ overflow: 'scroll' }}>
         {currentSession ? (
           <ListGroup className="list-group-flush">
-            {get(currentSession, 'moves', []).map((move, i) => (
+            {moves.map((move, i) => (
               <ListGroupItem key={`session-${i + 1}`}>{`${
                 i + 1
               }: ${move}`}</ListGroupItem>

@@ -2,7 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { isEqual } from 'lodash';
 import axios from 'axios';
 import styled from 'styled-components';
+import { isValidMove, serializeMove } from '../utils';
 import { useSession } from '../contexts/Session';
+
+const BoardStartMessage = styled.div`
+  width: 400px;
+  height: 400px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  text-align: center;
+`;
 
 const BoardContainer = styled.div`
   display: flex;
@@ -30,44 +42,36 @@ const BoardSquare = styled.div`
   border: ${(props) => (props.hilighted ? '4px' : '2px')} solid black;
 `;
 
-const containsMove = (possibleMove, availableMoves) => {
-  for (let move of availableMoves) {
-    if (isEqual(move, possibleMove)) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
-const serializeMove = (from, to) =>
-  `${(from[1] + 10).toString(36).toUpperCase()}${from[0] + 1}->${(to[1] + 10)
-    .toString(36)
-    .toUpperCase()}${to[0] + 1}`;
-
 const ChessBoard = () => {
+  const {
+    currentSession,
+    addMove,
+    knightCoordinates,
+    setKnightCoordinnates,
+    selectedCoordinates,
+    setSelectedCoordinates,
+  } = useSession();
+
+  const [isFirstMove, setIsFirstMove] = useState(true);
   const [board, setBoard] = useState(null);
-  const [selectedCoordinates, setSelectedCoordinates] = useState(null);
-  const [knightCoordinates, setKnightCoordinnates] = useState([7, 0]);
   const [availableMoves, setAvailableMoves] = useState([]);
 
-  const { addMove } = useSession();
-
   useEffect(() => {
-    const [column, row] = knightCoordinates;
-
-    const letterFormat = `${(column + 10).toString(36).toUpperCase()}${
-      row + 1
-    }`;
-
     const getMoves = async () => {
+      const [column, row] = knightCoordinates;
+
+      const letterFormat = `${(column + 10).toString(36).toUpperCase()}${
+        row + 1
+      }`;
+
       const moves = await axios.get(`/api/moves/${letterFormat}`);
 
       setAvailableMoves(moves.data);
     };
-
-    getMoves();
-  }, [knightCoordinates]);
+    if (!isFirstMove) {
+      getMoves();
+    }
+  }, [knightCoordinates, isFirstMove]);
 
   //Generate a 2d array of squares to represent the board, and store it in the component state
   useEffect(() => {
@@ -86,7 +90,7 @@ const ChessBoard = () => {
           knightCoordinates,
         );
         const canMoveTo =
-          containsMove(currentCoordinates, availableMoves) && isKnightSelected;
+          isValidMove(currentCoordinates, availableMoves) && isKnightSelected;
         const isDark =
           (i % 2 === 0 && j % 2 === 0) || (i % 2 === 1 && j % 2 === 1); // Style the board squares based on position
 
@@ -95,11 +99,15 @@ const ChessBoard = () => {
             dark={isDark}
             hilighted={isSelected || canMoveTo}
             onClick={() => {
-              if (isKnightSelected && canMoveTo) {
+              if (isFirstMove) {
+                setIsFirstMove(false);
                 setKnightCoordinnates(currentCoordinates);
-                addMove(serializeMove(knightCoordinates, currentCoordinates));
+              } else {
+                if (isKnightSelected && canMoveTo) {
+                  addMove(serializeMove(knightCoordinates, currentCoordinates));
+                  setKnightCoordinnates(currentCoordinates);
+                }
               }
-
               setSelectedCoordinates(currentCoordinates);
             }}
           >
@@ -112,9 +120,19 @@ const ChessBoard = () => {
     }
 
     setBoard(board);
-  }, [selectedCoordinates, knightCoordinates, availableMoves]);
+  }, [selectedCoordinates, knightCoordinates, availableMoves, addMove]);
 
-  return <BoardContainer>{board}</BoardContainer>;
+  return (
+    <BoardContainer>
+      {currentSession ? (
+        board
+      ) : (
+        <BoardStartMessage>
+          Create, or Load a Session to Start
+        </BoardStartMessage>
+      )}
+    </BoardContainer>
+  );
 };
 
 export default ChessBoard;

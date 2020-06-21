@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import moment from 'moment';
 import { Modal, Button, Table } from 'react-bootstrap';
 import { useSession } from '../contexts/Session';
 
@@ -20,8 +19,8 @@ const LoadSessionModal = ({ show, onClose }) => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Created</th>
-            <th>Last Updated</th>
+            <th>Moves</th>
+            <th>Last Move</th>
           </tr>
         </thead>
         <tbody>
@@ -35,8 +34,8 @@ const LoadSessionModal = ({ show, onClose }) => {
               }}
             >
               <td>{session.name}</td>
-              <td>{moment(session.createdAt).format('MM/DD h:mma')}</td>
-              <td>{moment(session.updatedAt).format('MM/DD h:mma')}</td>
+              <td>{session.moves.length}</td>
+              <td>{session.moves.slice(-1)[0]}</td>
             </tr>
           ))}
         </tbody>

@@ -4,14 +4,22 @@ import axios from 'axios';
 
 import CreateSessionModal from '../components/CreateSessionModal';
 import LoadSessionModal from '../components/LoadSessionModal';
+import { getLatestPostionFromMoves } from '../utils';
 
 const SessionContext = createContext();
 
 const useSession = () => useContext(SessionContext);
 
 const SessionProvider = ({ children }) => {
+  //Session data state
   const [sessions, setSessions] = useState([]);
-  const [currentSession, setCurrentSession] = useState(null);
+  const [currentSession, setCurrentSession] = useState(false);
+
+  //Board's sessionn state
+  const [selectedCoordinates, setSelectedCoordinates] = useState(false);
+  const [knightCoordinates, setKnightCoordinnates] = useState(false);
+
+  // Modal states
   const [createSessionModalOpen, setCreateSessionModalOpen] = useState(false);
   const [loadSessionModalOpen, setLoadSessionModalOpen] = useState(false);
 
@@ -20,6 +28,8 @@ const SessionProvider = ({ children }) => {
       const response = await axios.post(`/api/sessions/create`, { name });
 
       setCurrentSession(response.data);
+      setSelectedCoordinates(false);
+      setKnightCoordinnates(false);
       onComplete();
     };
     action();
@@ -30,6 +40,9 @@ const SessionProvider = ({ children }) => {
       const response = await axios.get(`/api/sessions/${id}`);
 
       setCurrentSession(response.data);
+      const lastPosition = getLatestPostionFromMoves(response.data.moves);
+
+      setKnightCoordinnates(lastPosition);
       onComplete();
     };
     action();
@@ -58,13 +71,24 @@ const SessionProvider = ({ children }) => {
   return (
     <SessionContext.Provider
       value={{
+        //Session
         currentSession,
         sessions,
+
+        //Session API
         createSession,
         loadSession,
         addMove,
+
+        //Modals
         setCreateSessionModalOpen,
         setLoadSessionModalOpen,
+
+        //Board
+        selectedCoordinates,
+        knightCoordinates,
+        setKnightCoordinnates,
+        setSelectedCoordinates,
       }}
     >
       <CreateSessionModal
