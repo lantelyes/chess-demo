@@ -129,6 +129,8 @@ const ChessBoard = () => {
     availableMoves,
     addMove,
     setSelectedCoordinates,
+    setKnightCoordinnates,
+    setIsFirstMove,
     isFirstMove,
   ]);
 
