@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { DB_NAME } = require('../../constants');
+const { DB_NAME, DB_URL } = require('../../constants');
 
 const initDb = () => {
-  mongoose.connect(`mongodb://localhost/${DB_NAME}`, {
+  mongoose.connect(`mongodb://${DB_URL}/${DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

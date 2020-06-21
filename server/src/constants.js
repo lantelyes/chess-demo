@@ -17,5 +17,6 @@ const COORDINATE_MAP = {
 };
 
 const DB_NAME = 'aetest';
+const DB_URL = process.env.MONGODB_URI || 'localhost';
 
-module.exports = { BOARD, COORDINATE_MAP, SERVER_PORT, DB_NAME };
+module.exports = { BOARD, COORDINATE_MAP, SERVER_PORT, DB_NAME, DB_URL };
