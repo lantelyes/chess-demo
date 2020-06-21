@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { isEqual } from 'lodash';
 import axios from 'axios';
 import styled from 'styled-components';
-import { isValidMove, serializeMove } from '../utils';
+import {
+  isValidMove,
+  serializeMove,
+  converttoLetterCoordinates,
+} from '../utils';
 import { useSession } from '../contexts/Session';
 
 const BoardStartMessage = styled.div`
@@ -62,9 +66,7 @@ const ChessBoard = () => {
     const getMoves = async () => {
       const [column, row] = knightCoordinates;
 
-      const letterFormat = `${(column + 10).toString(36).toUpperCase()}${
-        row + 1
-      }`;
+      const letterFormat = converttoLetterCoordinates(row, column);
 
       const moves = await axios.get(`/api/moves/${letterFormat}`);
 
