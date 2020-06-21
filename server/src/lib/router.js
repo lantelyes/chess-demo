@@ -3,7 +3,7 @@ const { Session } = require('./db/models/session');
 
 const initRouter = (app) => {
   //Moves
-  app.get('/moves/:coordinates', (req, res) => {
+  app.get('/api/moves/:coordinates', (req, res) => {
     const { coordinates } = req.params;
 
     if (!validateCordinates(coordinates)) {
@@ -16,13 +16,13 @@ const initRouter = (app) => {
   });
 
   //Sessions
-  app.get('/sessions', async (req, res) => {
+  app.get('/api/sessions', async (req, res) => {
     const sessions = await Session.find({});
 
     res.send(sessions);
   });
 
-  app.get('/sessions/:id', async (req, res) => {
+  app.get('/api/sessions/:id', async (req, res) => {
     const { id } = req.params;
 
     const sessions = await Session.find({ _id: id });
@@ -30,13 +30,13 @@ const initRouter = (app) => {
     res.send(sessions);
   });
 
-  app.post('/sessions/create', async (req, res) => {
+  app.post('/api/sessions/create', async (req, res) => {
     const session = await Session.create({});
 
     res.send(session);
   });
 
-  app.post('/sessions/:id/add-move', async (req, res) => {
+  app.post('/api/sessions/:id/add-move', async (req, res) => {
     const { id } = req.params;
 
     const { move } = req.body;
