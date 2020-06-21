@@ -1,8 +1,8 @@
-const SERVER_PORT = 3000;
+const SERVER_PORT = 5000;
 
 const BOARD = {
-  WIDTH: 7,
-  HEIGHT: 7,
+  WIDTH: 8,
+  HEIGHT: 8,
 };
 
 const COORDINATE_MAP = {
