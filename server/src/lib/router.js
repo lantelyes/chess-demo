@@ -25,13 +25,15 @@ const initRouter = (app) => {
   app.get('/api/sessions/:id', async (req, res) => {
     const { id } = req.params;
 
-    const sessions = await Session.find({ _id: id });
+    const sessions = await Session.findOne({ _id: id });
 
     res.send(sessions);
   });
 
   app.post('/api/sessions/create', async (req, res) => {
-    const session = await Session.create({});
+    const { name } = req.body;
+
+    const session = await Session.create({ name });
 
     res.send(session);
   });
