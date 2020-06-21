@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { isEqual } from 'lodash';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useSession } from '../contexts/Session';
 
 const BoardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  border: 2px solid black;
 `;
 
 const BoardRow = styled.div`
@@ -17,13 +20,14 @@ const BoardSquare = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 30px;
+  font-weight: 900;
   width: 50px;
   height: 50px;
   box-sizing: border-box;
   background-color: ${(props) =>
     props.hilighted ? 'grey' : props.dark ? '#b8b6b6' : 'none'};
-  border: ${(props) => (props.hilighted ? '3px' : '1px')} solid black;
+  border: ${(props) => (props.hilighted ? '4px' : '2px')} solid black;
 `;
 
 const containsMove = (possibleMove, availableMoves) => {
@@ -36,11 +40,18 @@ const containsMove = (possibleMove, availableMoves) => {
   return false;
 };
 
+const serializeMove = (from, to) =>
+  `${(from[1] + 10).toString(36).toUpperCase()}${from[0] + 1}->${(to[1] + 10)
+    .toString(36)
+    .toUpperCase()}${to[0] + 1}`;
+
 const ChessBoard = () => {
   const [board, setBoard] = useState(null);
   const [selectedCoordinates, setSelectedCoordinates] = useState(null);
   const [knightCoordinates, setKnightCoordinnates] = useState([7, 0]);
   const [availableMoves, setAvailableMoves] = useState([]);
+
+  const { addMove } = useSession();
 
   useEffect(() => {
     const [column, row] = knightCoordinates;
@@ -86,6 +97,7 @@ const ChessBoard = () => {
             onClick={() => {
               if (isKnightSelected && canMoveTo) {
                 setKnightCoordinnates(currentCoordinates);
+                addMove(serializeMove(knightCoordinates, currentCoordinates));
               }
 
               setSelectedCoordinates(currentCoordinates);
