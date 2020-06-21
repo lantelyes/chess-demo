@@ -15,9 +15,10 @@ const SessionProvider = ({ children }) => {
   const [sessions, setSessions] = useState([]);
   const [currentSession, setCurrentSession] = useState(false);
 
-  //Board's sessionn state
+  //Board's session state
   const [selectedCoordinates, setSelectedCoordinates] = useState(false);
   const [knightCoordinates, setKnightCoordinnates] = useState(false);
+  const [isFirstMove, setIsFirstMove] = useState(true);
 
   // Modal states
   const [createSessionModalOpen, setCreateSessionModalOpen] = useState(false);
@@ -43,6 +44,7 @@ const SessionProvider = ({ children }) => {
       const lastPosition = getLatestPostionFromMoves(response.data.moves);
 
       setKnightCoordinnates(lastPosition);
+      setIsFirstMove(false);
       onComplete();
     };
     action();
@@ -87,8 +89,10 @@ const SessionProvider = ({ children }) => {
         //Board
         selectedCoordinates,
         knightCoordinates,
+        isFirstMove,
         setKnightCoordinnates,
         setSelectedCoordinates,
+        setIsFirstMove,
       }}
     >
       <CreateSessionModal

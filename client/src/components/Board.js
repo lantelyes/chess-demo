@@ -34,6 +34,7 @@ const BoardSquare = styled.div`
   align-items: center;
   font-size: 30px;
   font-weight: 900;
+  color: ${(props) => (props.hilighted ? 'white' : 'black')};
   width: 50px;
   height: 50px;
   box-sizing: border-box;
@@ -47,12 +48,13 @@ const ChessBoard = () => {
     currentSession,
     addMove,
     knightCoordinates,
-    setKnightCoordinnates,
+    isFirstMove,
     selectedCoordinates,
+    setKnightCoordinnates,
     setSelectedCoordinates,
+    setIsFirstMove,
   } = useSession();
 
-  const [isFirstMove, setIsFirstMove] = useState(true);
   const [board, setBoard] = useState(null);
   const [availableMoves, setAvailableMoves] = useState([]);
 
@@ -97,6 +99,7 @@ const ChessBoard = () => {
         row.push(
           <BoardSquare
             dark={isDark}
+            containsKnight={containsKnight}
             hilighted={isSelected || canMoveTo}
             onClick={() => {
               if (isFirstMove) {
@@ -120,7 +123,14 @@ const ChessBoard = () => {
     }
 
     setBoard(board);
-  }, [selectedCoordinates, knightCoordinates, availableMoves, addMove]);
+  }, [
+    selectedCoordinates,
+    knightCoordinates,
+    availableMoves,
+    addMove,
+    setSelectedCoordinates,
+    isFirstMove,
+  ]);
 
   return (
     <BoardContainer>
