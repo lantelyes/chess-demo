@@ -1,0 +1,24 @@
+{
+  "name": "aestudio-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lantelyes/aestudio-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lantelyes/aestudio-test/issues"
+  },
+  "homepage": "https://github.com/lantelyes/aestudio-test#readme",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  }
+}
