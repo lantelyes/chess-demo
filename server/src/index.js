@@ -1,11 +1,10 @@
 const express = require('express');
 const { initRouter } = require('./lib/router');
 const { SERVER_PORT } = require('./constants');
-const bodyParser = require('body-parser');
 const { initDb } = require('./lib/db/index');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 initDb();
 initRouter(app);
