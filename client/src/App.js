@@ -24,16 +24,8 @@ const BoardContainer = styled.div`
   margin-top: 40px;
 `;
 
-const Providers = ({ children }) => (
-  <SessionProvider>{children}</SessionProvider>
-);
-
-Providers.propTypes = {
-  children: PropTypes.any,
-};
-
 const App = () => (
-  <Providers>
+  <SessionProvider>
     <MainContainer>
       <ActionBar></ActionBar>
       <BoardContainer>
@@ -41,7 +33,7 @@ const App = () => (
         <SessionView />
       </BoardContainer>
     </MainContainer>
-  </Providers>
+  </SessionProvider>
 );
 
 export default App;
