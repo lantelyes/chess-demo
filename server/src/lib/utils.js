@@ -29,9 +29,9 @@ const getAvailableMoves = (coordinates) => {
 };
 
 const convertToNumericCoordinates = (coordinates) => {
-  const [row, column] = coordinates.split('');
+  const [column, row] = coordinates.split('');
 
-  return [COORDINATE_MAP[row], Number(column) - 1];
+  return [COORDINATE_MAP[column], Number(row) - 1];
 };
 
 // Validate the chessboard coordinates
