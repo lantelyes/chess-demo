@@ -1,4 +1,5 @@
 import React from 'react';
+import Joyride from 'react-joyride';
 import './theme/bootstrap.min.css';
 
 import { SessionProvider } from './contexts/Session';
@@ -8,6 +9,8 @@ import ActionBar from './components/Panels/ActionBar';
 
 import styled from 'styled-components';
 import SessionView from './components/Panels/SessionView';
+
+import { TUTORIAL_STEPS } from './constants';
 
 const MainContainer = styled.div`
   display: flex;
@@ -25,6 +28,15 @@ const BoardContainer = styled.div`
 
 const App = () => (
   <SessionProvider>
+    <Joyride
+      steps={TUTORIAL_STEPS}
+      continuous
+      styles={{
+        options: {
+          primaryColor: 'black',
+        },
+      }}
+    />
     <MainContainer>
       <ActionBar></ActionBar>
       <BoardContainer>

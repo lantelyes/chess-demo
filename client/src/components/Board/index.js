@@ -36,7 +36,7 @@ const ChessBoard = () => {
   }, [knightCoordinates, currentCoordinates]);
 
   return (
-    <BoardContainer>
+    <BoardContainer id="board">
       {currentSession ? (
         board
       ) : (

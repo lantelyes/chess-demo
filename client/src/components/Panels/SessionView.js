@@ -19,7 +19,10 @@ const SessionView = () => {
   const moves = get(currentSession, 'moves', []);
 
   return (
-    <Card style={{ width: 300, height: '100%', maxHeight: 400 }}>
+    <Card
+      id="session-view"
+      style={{ width: 300, height: '100%', maxHeight: 400 }}
+    >
       <Card.Header as="h5">
         {currentSession ? `Session: ${currentSession.name}` : 'Session'}
       </Card.Header>

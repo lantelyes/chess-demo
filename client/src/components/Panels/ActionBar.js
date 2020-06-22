@@ -13,7 +13,7 @@ const ActionBar = () => {
   const { setCreateSessionModalOpen, setLoadSessionModalOpen } = useSession();
 
   return (
-    <Card style={{ width: 740 }}>
+    <Card id="action-bar" style={{ width: 740 }}>
       <Card.Header as="h4">Chess Board Demo</Card.Header>
       <Card.Body>
         <ActionsContainer>
