@@ -4,7 +4,7 @@ import './theme/bootstrap.min.css';
 
 import { SessionProvider } from './contexts/Session';
 
-import ChessBoard from './components/Board';
+import ChessBoard from './components/Board/index';
 import ActionBar from './components/ActionBar';
 
 import styled from 'styled-components';

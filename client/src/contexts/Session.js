@@ -4,7 +4,10 @@ import axios from 'axios';
 
 import CreateSessionModal from '../components/CreateSessionModal';
 import LoadSessionModal from '../components/LoadSessionModal';
-import { getLatestPostionFromMoves } from '../utils';
+import {
+  getLatestPostionFromMoves,
+  converttoLetterCoordinates,
+} from '../utils';
 
 const SessionContext = createContext();
 
@@ -16,6 +19,7 @@ const SessionProvider = ({ children }) => {
   const [currentSession, setCurrentSession] = useState(false);
 
   //Board's session state
+  const [availableMoves, setAvailableMoves] = useState([]);
   const [selectedCoordinates, setSelectedCoordinates] = useState(false);
   const [knightCoordinates, setKnightCoordinnates] = useState(false);
   const [isFirstMove, setIsFirstMove] = useState(true);
@@ -62,6 +66,23 @@ const SessionProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const getMoves = async () => {
+      const [column, row] = knightCoordinates;
+
+      const letterFormat = converttoLetterCoordinates(row, column);
+
+      const moves = await axios.get(`/api/moves/${letterFormat}`);
+
+      setAvailableMoves(moves.data);
+    };
+
+    if (!isFirstMove) {
+      console.log('getting moves');
+      getMoves();
+    }
+  }, [knightCoordinates, selectedCoordinates, isFirstMove]);
+
+  useEffect(() => {
     const getSessions = async () => {
       const response = await axios.get(`/api/sessions`);
       setSessions(response.data);
@@ -87,12 +108,14 @@ const SessionProvider = ({ children }) => {
         setLoadSessionModalOpen,
 
         //Board
+        availableMoves,
         selectedCoordinates,
         knightCoordinates,
         isFirstMove,
         setKnightCoordinnates,
         setSelectedCoordinates,
         setIsFirstMove,
+        setAvailableMoves,
       }}
     >
       <CreateSessionModal
