@@ -51,6 +51,12 @@ const initRouter = (app) => {
 
     res.send(updatedSession);
   });
+
+
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(staticDir))
+    app.get(/^(?!.*(js|json|svg|png|jpg)).*$/, (req, res) => res.sendFile(staticIndex))
+  }
 };
 
 module.exports = { initRouter };
