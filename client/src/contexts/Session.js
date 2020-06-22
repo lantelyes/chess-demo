@@ -82,7 +82,7 @@ const SessionProvider = ({ children }) => {
     if (!isFirstMove && knightCoordinates) {
       getMoves();
     }
-  }, [knightCoordinates, selectedCoordinates, isFirstMove]);
+  }, [knightCoordinates, isFirstMove]);
 
   useEffect(() => {
     const getSessions = async () => {
