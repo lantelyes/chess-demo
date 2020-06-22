@@ -21,6 +21,7 @@ const SessionProvider = ({ children }) => {
 
   //Board states
   const [availableMoves, setAvailableMoves] = useState([]);
+  const [availableSecondaryMoves, setAvailableSecondaryMoves] = useState([]);
   const [selectedCoordinates, setSelectedCoordinates] = useState(false);
   const [knightCoordinates, setKnightCoordinnates] = useState(false);
 
@@ -81,9 +82,12 @@ const SessionProvider = ({ children }) => {
 
       const letterFormat = convertToLetterCoordinates(column, row);
 
-      const moves = await axios.get(`/api/moves/${letterFormat}`);
+      const result = await axios.get(`/api/moves/${letterFormat}`);
 
-      setAvailableMoves(moves.data);
+      const { moves, secondaryMoves } = result.data;
+
+      setAvailableMoves(moves);
+      setAvailableSecondaryMoves(secondaryMoves);
     };
 
     if (!isFirstMove && knightCoordinates) {
@@ -120,6 +124,7 @@ const SessionProvider = ({ children }) => {
         setLoadSessionModalOpen,
 
         //Board state
+        availableSecondaryMoves,
         availableMoves,
         selectedCoordinates,
         knightCoordinates,

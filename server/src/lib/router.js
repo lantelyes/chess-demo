@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
+const { flatten } = require('lodash');
 const {
   getAvailableMoves,
   validateCordinates,
   validateMove,
+  convertToLetterCoordinates,
 } = require('./utils');
 const { Session } = require('./db/models/session');
 
@@ -23,9 +25,13 @@ const initRouter = (app) => {
         );
     }
 
-    const result = getAvailableMoves(coordinates);
+    const moves = getAvailableMoves(coordinates);
 
-    res.send(result);
+    const secondaryMoves = flatten(
+      moves.map((move) => getAvailableMoves(convertToLetterCoordinates(move))),
+    );
+
+    res.send({ moves, secondaryMoves });
   });
 
   //Sessions

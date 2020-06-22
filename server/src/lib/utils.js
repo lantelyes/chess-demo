@@ -34,6 +34,11 @@ const convertToNumericCoordinates = (coordinates) => {
   return [COORDINATE_MAP[column], Number(row) - 1];
 };
 
+const convertToLetterCoordinates = (coordinates) => {
+  const [column, row] = coordinates;
+  return `${(column + 10).toString(36).toUpperCase()}${row + 1}`;
+};
+
 // Validate the chessboard coordinates
 // Input: Coordinates string format (eg. C3)
 const validateCordinates = (coordinates) => {
@@ -63,6 +68,7 @@ const validateMove = (move) => {
 module.exports = {
   getAvailableMoves,
   convertToNumericCoordinates,
+  convertToLetterCoordinates,
   validateCordinates,
   validateMove,
 };
