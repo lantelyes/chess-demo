@@ -1,4 +1,4 @@
-const SERVER_PORT = 5000;
+const SERVER_PORT = process.env.PORT || '5000';
 
 const BOARD = {
   WIDTH: 8,
