@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { get } from 'lodash';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { useSession } from '../contexts/Session';
+import { useSession } from '../../contexts/Session';
 
 const SessionNotFounndMessage = styled.div`
   display: flex;

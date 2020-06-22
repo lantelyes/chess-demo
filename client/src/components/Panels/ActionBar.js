@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Button } from 'react-bootstrap';
-import { useSession } from '../contexts/Session';
+import { useSession } from '../../contexts/Session';
 
 const ActionsContainer = styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Modal, Button, Form } from 'react-bootstrap';
-import { useSession } from '../contexts/Session';
+import { useSession } from '../../contexts/Session';
 
 const CreateSessionModal = ({ show, onClose }) => {
   const [name, setName] = useState('');

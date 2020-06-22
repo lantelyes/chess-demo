@@ -2,8 +2,8 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import CreateSessionModal from '../components/CreateSessionModal';
-import LoadSessionModal from '../components/LoadSessionModal';
+import CreateSessionModal from '../components/Modals/CreateSessionModal';
+import LoadSessionModal from '../components/Modals/LoadSessionModal';
 import {
   getLatestPostionFromMoves,
   convertToLetterCoordinates,

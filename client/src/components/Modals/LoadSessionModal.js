@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Modal, Button, Table } from 'react-bootstrap';
-import { useSession } from '../contexts/Session';
+import { useSession } from '../../contexts/Session';
 
 const NoSessionsFoundMessage = styled.div`
   display: flex;
