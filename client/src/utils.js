@@ -29,7 +29,7 @@ export const isValidMove = (move, availableMoves) => {
   return false;
 };
 
-export const convertToLetterCoordinates = (row, column) =>
+export const convertToLetterCoordinates = (column, row) =>
   `${(column + 10).toString(36).toUpperCase()}${row + 1}`;
 
 export const serializeMove = (from, to) =>

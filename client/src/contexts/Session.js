@@ -79,7 +79,7 @@ const SessionProvider = ({ children }) => {
     const getMoves = async () => {
       const [column, row] = knightCoordinates;
 
-      const letterFormat = convertToLetterCoordinates(row, column);
+      const letterFormat = convertToLetterCoordinates(column, row);
 
       const moves = await axios.get(`/api/moves/${letterFormat}`);
 
