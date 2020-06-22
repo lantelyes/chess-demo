@@ -47,8 +47,11 @@ const SessionProvider = ({ children }) => {
       setCurrentSession(response.data);
       const lastPosition = getLatestPostionFromMoves(response.data.moves);
 
-      setKnightCoordinnates(lastPosition);
-      setIsFirstMove(false);
+      if (lastPosition) {
+        setKnightCoordinnates(lastPosition);
+        setIsFirstMove(false);
+      }
+
       onComplete();
     };
     action();
