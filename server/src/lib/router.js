@@ -1,6 +1,10 @@
 const express = require('express');
 const path = require('path');
-const { getAvailableMoves, validateCordinates } = require('./utils');
+const {
+  getAvailableMoves,
+  validateCordinates,
+  validateMove,
+} = require('./utils');
 const { Session } = require('./db/models/session');
 
 const staticDir = path.join(__dirname, '..', '..', '..', 'client', 'build');
@@ -12,7 +16,11 @@ const initRouter = (app) => {
     const { coordinates } = req.params;
 
     if (!validateCordinates(coordinates)) {
-      res.status(500).send('Invalid coordinate format');
+      res
+        .status(500)
+        .send(
+          'Invalid coordinate format, must be in algebreaic notation (eg. A1)',
+        );
     }
 
     const result = getAvailableMoves(coordinates);
@@ -47,6 +55,14 @@ const initRouter = (app) => {
     const { id } = req.params;
 
     const { move } = req.body;
+
+    if (!validateMove) {
+      res
+        .status(500)
+        .send(
+          'Invalid move format, must be in algebreaic notation with "->" between the corrdinates (eg. A1->C3',
+        );
+    }
 
     const updatedSession = await Session.findOneAndUpdate(
       { _id: id },

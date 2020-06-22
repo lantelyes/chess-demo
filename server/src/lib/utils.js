@@ -35,7 +35,7 @@ const convertToNumericCoordinates = (coordinates) => {
 };
 
 // Validate the chessboard coordinates
-// Input: Coordinates string format
+// Input: Coordinates string format (eg. C3)
 const validateCordinates = (coordinates) => {
   //Get the upper bounds based on board size
   const columnUpperBound = String.fromCharCode(97 + BOARD.WIDTH).toUpperCase(); // Get the upper bound in letter format
@@ -48,8 +48,21 @@ const validateCordinates = (coordinates) => {
   );
 };
 
+// Validate a move
+// Input: Move in string format (eg. A1->C3)
+const validateMove = (move) => {
+  if (!move || !isString(move)) {
+    return false;
+  }
+
+  const [to, from] = move.split('->');
+
+  return validateCordinates(to) && validateCordinates(from);
+};
+
 module.exports = {
   getAvailableMoves,
   convertToNumericCoordinates,
   validateCordinates,
+  validateMove,
 };
