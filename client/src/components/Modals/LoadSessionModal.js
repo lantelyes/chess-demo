@@ -13,6 +13,11 @@ const NoSessionsFoundMessage = styled.div`
   height: 100px;
 `;
 
+const SessionsTableContainer = styled.div`
+  max-height: 400px;
+  overflow: scroll;
+`;
+
 const LoadSessionModal = ({ show, onClose }) => {
   const [selectedSessionId, setSelectedSessionId] = useState(null);
 
@@ -23,37 +28,39 @@ const LoadSessionModal = ({ show, onClose }) => {
       <Modal.Header closeButton>
         <Modal.Title>Load Session</Modal.Title>
       </Modal.Header>
-      {!isEmpty(sessions) ? (
-        <Table striped bordered>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Moves</th>
-              <th>Last Move</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sessions.map((session, i) => (
-              <tr
-                key={`load-session-${i + 1}`}
-                onClick={() => setSelectedSessionId(session._id)}
-                style={{
-                  backgroundColor:
-                    selectedSessionId === session._id ? '#c9c9c9' : 'unset',
-                }}
-              >
-                <td>{session.name}</td>
-                <td>{session.moves.length}</td>
-                <td>
-                  {session.moves.length ? session.moves.slice(-1)[0] : 'None'}
-                </td>
+      <SessionsTableContainer>
+        {!isEmpty(sessions) ? (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Moves</th>
+                <th>Last Move</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      ) : (
-        <NoSessionsFoundMessage>No Sessions Found</NoSessionsFoundMessage>
-      )}
+            </thead>
+            <tbody>
+              {sessions.map((session, i) => (
+                <tr
+                  key={`load-session-${i + 1}`}
+                  onClick={() => setSelectedSessionId(session._id)}
+                  style={{
+                    backgroundColor:
+                      selectedSessionId === session._id ? '#c9c9c9' : 'unset',
+                  }}
+                >
+                  <td>{session.name}</td>
+                  <td>{session.moves.length}</td>
+                  <td>
+                    {session.moves.length ? session.moves.slice(-1)[0] : 'None'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <NoSessionsFoundMessage>No Sessions Found</NoSessionsFoundMessage>
+        )}
+      </SessionsTableContainer>
       <Modal.Footer>
         <Button
           variant="secondary"
