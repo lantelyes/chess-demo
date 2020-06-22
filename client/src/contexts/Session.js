@@ -76,8 +76,7 @@ const SessionProvider = ({ children }) => {
       setAvailableMoves(moves.data);
     };
 
-    if (!isFirstMove) {
-      console.log('getting moves');
+    if (!isFirstMove && knightCoordinates) {
       getMoves();
     }
   }, [knightCoordinates, selectedCoordinates, isFirstMove]);
