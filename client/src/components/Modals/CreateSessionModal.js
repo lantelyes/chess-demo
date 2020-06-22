@@ -15,8 +15,13 @@ const CreateSessionModal = ({ show, onClose }) => {
         <Modal.Title>New Session</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>
-        <Form>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          createSession(name, onClose);
+        }}
+      >
+        <Modal.Body>
           <Form.Group controlId="session-name">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -25,21 +30,17 @@ const CreateSessionModal = ({ show, onClose }) => {
               placeholder="New Session Name"
             />
           </Form.Group>
-        </Form>
-      </Modal.Body>
+        </Modal.Body>
 
-      <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={() => createSession(name, onClose)}
-          disabled={!name}
-        >
-          Create
-        </Button>
-        <Button variant="primary" onClick={onClose}>
-          Cancel
-        </Button>
-      </Modal.Footer>
+        <Modal.Footer>
+          <Button variant="secondary" type="submit" disabled={!name}>
+            Create
+          </Button>
+          <Button variant="primary" onClick={onClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Form>
     </Modal>
   );
 };
