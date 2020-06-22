@@ -6,6 +6,10 @@
         margin-right: auto;
     }
 
+}
+
+@media (max-width: 800px) {
+
     html {
         width:100%;
         overflow-x: hidden !important;
@@ -14,7 +18,7 @@
         width:100%;
         overflow-x: hidden !important;
     }
-
+    
 }
 
 body.modal-open {
