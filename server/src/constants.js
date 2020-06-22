@@ -16,7 +16,6 @@ const COORDINATE_MAP = {
   H: 7,
 };
 
-const DB_NAME = 'aetest';
-const DB_URL = process.env.MONGODB_URI || 'mongodb://localhost';
+const DB_URL = process.env.MONGODB_URI || 'mongodb://localhost/aetest';
 
-module.exports = { BOARD, COORDINATE_MAP, SERVER_PORT, DB_NAME, DB_URL };
+module.exports = { BOARD, COORDINATE_MAP, SERVER_PORT, DB_URL };
