@@ -7,7 +7,7 @@
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "client": "cd client && yarn start",
     "server": "cd server && yarn start",
-    "start": "concurrently \"yarn server\" \"yarn client\"",
+    "start": "yarn server",
     "heroku-postbuild": "cd client && yarn build",
     "install": "yarn install-server && yarn install-client",
     "install-client": "cd client && yarn install",
