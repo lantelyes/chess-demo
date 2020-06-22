@@ -6,7 +6,7 @@ import CreateSessionModal from '../components/CreateSessionModal';
 import LoadSessionModal from '../components/LoadSessionModal';
 import {
   getLatestPostionFromMoves,
-  converttoLetterCoordinates,
+  convertToLetterCoordinates,
 } from '../utils';
 
 const SessionContext = createContext();
@@ -69,7 +69,7 @@ const SessionProvider = ({ children }) => {
     const getMoves = async () => {
       const [column, row] = knightCoordinates;
 
-      const letterFormat = converttoLetterCoordinates(row, column);
+      const letterFormat = convertToLetterCoordinates(row, column);
 
       const moves = await axios.get(`/api/moves/${letterFormat}`);
 
