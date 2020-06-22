@@ -1,5 +1,10 @@
+const express = require('express');
+const path = require('path');
 const { getAvailableMoves, validateCordinates } = require('./utils');
 const { Session } = require('./db/models/session');
+
+const staticDir = path.join(__dirname, '..', '..', 'client', 'build');
+const staticIndex = path.join(staticDir, 'index.html');
 
 const initRouter = (app) => {
   //Moves
@@ -52,10 +57,11 @@ const initRouter = (app) => {
     res.send(updatedSession);
   });
 
-
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(staticDir))
-    app.get(/^(?!.*(js|json|svg|png|jpg)).*$/, (req, res) => res.sendFile(staticIndex))
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(staticDir));
+    app.get(/^(?!.*(js|json|svg|png|jpg)).*$/, (req, res) =>
+      res.sendFile(staticIndex),
+    );
   }
 };
 
