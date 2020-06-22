@@ -14,20 +14,22 @@ const SessionContext = createContext();
 const useSession = () => useContext(SessionContext);
 
 const SessionProvider = ({ children }) => {
-  //Session data state
+  //Global session state
   const [sessions, setSessions] = useState([]);
   const [currentSession, setCurrentSession] = useState(false);
+  const [isFirstMove, setIsFirstMove] = useState(true);
 
-  //Board's session state
+  //Board states
   const [availableMoves, setAvailableMoves] = useState([]);
   const [selectedCoordinates, setSelectedCoordinates] = useState(false);
   const [knightCoordinates, setKnightCoordinnates] = useState(false);
-  const [isFirstMove, setIsFirstMove] = useState(true);
 
   // Modal states
   const [createSessionModalOpen, setCreateSessionModalOpen] = useState(false);
   const [loadSessionModalOpen, setLoadSessionModalOpen] = useState(false);
 
+  //Create a new session with a given name
+  // Sets the current session in the application state to the new session
   const createSession = (name, onComplete = () => {}) => {
     const action = async () => {
       const response = await axios.post(`/api/sessions/create`, { name });
@@ -40,6 +42,8 @@ const SessionProvider = ({ children }) => {
     action();
   };
 
+  //Load a stored session from the database
+  // Sets the loaded session in the application state to returned session
   const loadSession = (id, onComplete = () => {}) => {
     const action = async () => {
       const response = await axios.get(`/api/sessions/${id}`);
@@ -57,22 +61,25 @@ const SessionProvider = ({ children }) => {
     action();
   };
 
-  const addMove = (move) => {
+  // Adds a move to the current session, input must be in algebraic notation (eg. C2->D4)
+  const addMove = (move, onComplete = () => {}) => {
     const action = async () => {
       const response = await axios.post(
         `/api/sessions/${currentSession._id}/add-move`,
         { move },
       );
       setCurrentSession(response.data);
+      onComplete();
     };
     action();
   };
 
+  //Get available moves whenever the knight's position on the board changes and store them in the application state
   useEffect(() => {
     const getMoves = async () => {
       const [column, row] = knightCoordinates;
 
-      const letterFormat = convertToLetterCoordinates(row, column);
+      const letterFormat = convertToLetterCoordinates(column, row);
 
       const moves = await axios.get(`/api/moves/${letterFormat}`);
 
@@ -84,6 +91,7 @@ const SessionProvider = ({ children }) => {
     }
   }, [knightCoordinates, isFirstMove]);
 
+  //Load the stored sessions into the application state
   useEffect(() => {
     const getSessions = async () => {
       const response = await axios.get(`/api/sessions`);
@@ -96,9 +104,11 @@ const SessionProvider = ({ children }) => {
   return (
     <SessionContext.Provider
       value={{
-        //Session
+        //Session state
         currentSession,
         sessions,
+        isFirstMove,
+        setIsFirstMove,
 
         //Session API
         createSession,
@@ -109,15 +119,12 @@ const SessionProvider = ({ children }) => {
         setCreateSessionModalOpen,
         setLoadSessionModalOpen,
 
-        //Board
+        //Board state
         availableMoves,
         selectedCoordinates,
         knightCoordinates,
-        isFirstMove,
         setKnightCoordinnates,
         setSelectedCoordinates,
-        setIsFirstMove,
-        setAvailableMoves,
       }}
     >
       <CreateSessionModal
