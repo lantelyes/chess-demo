@@ -9,7 +9,7 @@ const Square = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 900;
   color: ${(props) => (props.hilighted ? 'white' : 'black')};
   width: 50px;
@@ -18,6 +18,12 @@ const Square = styled.div`
   background-color: ${(props) =>
     props.hilighted ? 'grey' : props.dark ? '#b8b6b6' : 'none'};
   border: ${(props) => (props.hilighted ? '4px' : '2px')} solid black;
+
+  @media (max-width: 400px) {
+    width: 38px;
+    height: 38px;
+    font-size: 28px;
+  }
 `;
 
 const BoardSquare = ({ coordinates }) => {

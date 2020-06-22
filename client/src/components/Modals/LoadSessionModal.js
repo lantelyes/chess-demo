@@ -18,6 +18,18 @@ const SessionsTableContainer = styled.div`
   overflow: scroll;
 `;
 
+const HideTdOnMobile = styled.td`
+  @media (max-width: 400px) {
+    display: none;
+  }
+`;
+
+const HideThOnMobile = styled.th`
+  @media (max-width: 400px) {
+    display: none;
+  }
+`;
+
 const LoadSessionModal = ({ show, onClose }) => {
   const [selectedSessionId, setSelectedSessionId] = useState(null);
 
@@ -34,7 +46,7 @@ const LoadSessionModal = ({ show, onClose }) => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Moves</th>
+                <HideThOnMobile>Moves</HideThOnMobile>
                 <th>Last Move</th>
               </tr>
             </thead>
@@ -49,7 +61,7 @@ const LoadSessionModal = ({ show, onClose }) => {
                   }}
                 >
                   <td>{session.name}</td>
-                  <td>{session.moves.length}</td>
+                  <HideTdOnMobile>{session.moves.length}</HideTdOnMobile>
                   <td>
                     {session.moves.length ? session.moves.slice(-1)[0] : 'None'}
                   </td>

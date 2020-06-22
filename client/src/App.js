@@ -1,6 +1,7 @@
 import React from 'react';
 import Joyride from 'react-joyride';
 import './theme/bootstrap.min.css';
+import './theme/custom.css';
 
 import { SessionProvider } from './contexts/Session';
 
@@ -16,7 +17,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 40px;
 `;
 
 const BoardContainer = styled.div`
@@ -24,6 +25,11 @@ const BoardContainer = styled.div`
   justify-content: space-between;
   width: 740px;
   margin-top: 40px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const App = () => (
@@ -34,6 +40,7 @@ const App = () => (
       styles={{
         options: {
           primaryColor: 'black',
+          width: 300,
         },
       }}
     />
