@@ -26,10 +26,15 @@ const ChessBoard = () => {
       for (let j = 0; j < 8; j++) {
         const coordinates = [i, j];
 
-        row.push(<BoardSquare coordinates={coordinates}></BoardSquare>);
+        row.push(
+          <BoardSquare
+            key={`square-${i}-${j}`}
+            coordinates={coordinates}
+          ></BoardSquare>,
+        );
       }
 
-      board.push(<BoardRow>{row}</BoardRow>);
+      board.push(<BoardRow key={`row-${i}`}>{row}</BoardRow>);
     }
 
     setBoard(board);
