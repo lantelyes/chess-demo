@@ -37,7 +37,7 @@ const getSquareColor = (props) => {
   } = props;
 
   if (isKnightSelected) {
-    if (isSecondaryMove) {
+    if (isSecondaryMove && !isSelected) {
       return '#696969';
     }
 
