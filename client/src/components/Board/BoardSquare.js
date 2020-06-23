@@ -5,30 +5,86 @@ import { isEqual } from 'lodash';
 import styled from 'styled-components';
 import { useSession } from '../../contexts/Session';
 
-const getSquareContents = (containsKnight, isPrimaryMove, isSecondaryMove) => {
+const getSquareContents = (
+  containsKnight,
+  isPrimaryMove,
+  isSecondaryMove,
+  isKnightSelected,
+) => {
   if (containsKnight) {
     return 'K';
-  } else if (isPrimaryMove) {
-    return '1';
-  } else if (isSecondaryMove) {
-    return '2';
-  } else {
-    return '';
   }
+
+  if (isKnightSelected) {
+    if (isPrimaryMove) {
+      return '1';
+    }
+    if (isSecondaryMove) {
+      return '2';
+    }
+  }
+
+  return '';
 };
 
 const getSquareColor = (props) => {
-  const { isDark, isPrimaryMove, isSelected, isSecondaryMove } = props;
+  const {
+    isDark,
+    isPrimaryMove,
+    isSelected,
+    isSecondaryMove,
+    isKnightSelected,
+  } = props;
 
-  if (isSecondaryMove) {
-    return '#2e2e2e';
+  if (isKnightSelected) {
+    if (isSecondaryMove) {
+      return '#696969';
+    }
+
+    if (isPrimaryMove) {
+      return '#000000';
+    }
   }
-
-  if (isPrimaryMove || isSelected) {
+  if (isSelected) {
     return '#000000';
+  } else {
+    return isDark ? '#b8b6b6' : 'none';
+  }
+};
+
+const getSquareBorderWidth = (props) => {
+  const {
+    containsKnight,
+    isPrimaryMove,
+    isSelected,
+    isSecondaryMove,
+    isKnightSelected,
+  } = props;
+  if (isKnightSelected) {
+    if (isPrimaryMove || isSecondaryMove || containsKnight) {
+      return '4px';
+    }
   }
 
-  return isDark ? '#b8b6b6' : 'none';
+  if (isSelected) {
+    return '4px';
+  }
+
+  return '2px';
+};
+
+const getSquareFontColor = (props) => {
+  const { isPrimaryMove, isSecondaryMove, isKnightSelected } = props;
+
+  if (props.containsKnight && props.isSelected) {
+    return '#ffffff';
+  }
+
+  if (isKnightSelected && (isPrimaryMove || isSecondaryMove)) {
+    return '#ffffff';
+  }
+
+  return '#000000';
 };
 
 const Square = styled.div`
@@ -37,19 +93,12 @@ const Square = styled.div`
   align-items: center;
   font-size: 32px;
   font-weight: 900;
-  color: ${(props) =>
-    (props.containsKnight && props.isSelected) ||
-    props.isPrimaryMove ||
-    props.isSecondaryMove
-      ? 'white'
-      : 'black'};
+  color: ${(props) => getSquareFontColor(props)};
   width: 50px;
   height: 50px;
   box-sizing: border-box;
   background-color: ${(props) => getSquareColor(props)};
-  border: ${(props) =>
-      props.isPrimaryMove || props.isSecondaryMove ? '4px' : '2px'}
-    solid black;
+  border: ${(props) => getSquareBorderWidth(props)} solid black;
   @media (max-width: 400px) {
     width: 38px;
     height: 38px;
@@ -87,6 +136,7 @@ const BoardSquare = ({ coordinates }) => {
       isDark={isDark}
       isPrimaryMove={isPrimaryMove}
       isSecondaryMove={isSecondaryMove}
+      isKnightSelected={isKnightSelected}
       containsKnight={containsKnight}
       onClick={() => {
         if (isFirstMove) {
@@ -101,7 +151,12 @@ const BoardSquare = ({ coordinates }) => {
         setSelectedCoordinates(coordinates);
       }}
     >
-      {getSquareContents(containsKnight, isPrimaryMove, isSecondaryMove)}
+      {getSquareContents(
+        containsKnight,
+        isPrimaryMove,
+        isSecondaryMove,
+        isKnightSelected,
+      )}
     </Square>
   );
 };
