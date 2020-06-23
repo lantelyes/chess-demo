@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import SessionView from './components/Panels/SessionView';
 
 import { TUTORIAL_STEPS } from './constants';
+import Help from './components/Panels/Help';
 
 const MainContainer = styled.div`
   display: flex;
@@ -50,6 +51,7 @@ const App = () => (
         <ChessBoard />
         <SessionView />
       </BoardContainer>
+      <Help />
     </MainContainer>
   </SessionProvider>
 );
