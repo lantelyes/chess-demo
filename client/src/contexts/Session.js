@@ -38,6 +38,9 @@ const SessionProvider = ({ children }) => {
       setCurrentSession(response.data);
       setSelectedCoordinates(false);
       setKnightCoordinnates(false);
+      setAvailableMoves([]);
+      setAvailableSecondaryMoves([]);
+      setIsFirstMove(true);
       onComplete();
     };
     action();
