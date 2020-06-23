@@ -5,6 +5,7 @@ const initDb = () => {
   mongoose.connect(DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
 
   return mongoose.connection;
