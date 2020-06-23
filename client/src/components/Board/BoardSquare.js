@@ -68,9 +68,9 @@ const getSquareBorderWidth = (props) => {
 
   if (isSelected) {
     return '4px';
+  } else {
+    return '2px';
   }
-
-  return '2px';
 };
 
 const getSquareFontColor = (props) => {
@@ -99,6 +99,7 @@ const Square = styled.div`
   box-sizing: border-box;
   background-color: ${(props) => getSquareColor(props)};
   border: ${(props) => getSquareBorderWidth(props)} solid black;
+
   @media (max-width: 400px) {
     width: 38px;
     height: 38px;
