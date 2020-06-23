@@ -38,6 +38,7 @@ const App = () => (
   <SessionProvider>
     <Joyride
       steps={TUTORIAL_STEPS}
+      showSkipButton
       continuous
       styles={{
         options: {

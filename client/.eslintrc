@@ -1,10 +1,11 @@
 {
-  "extends": ["last", "plugin:react/recommended"],
+  "extends": ["last", "plugin:react/recommended", "plugin:cypress/recommended"],
   "env": {
     "node": true,
     "commonjs": true,
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "settings": {
     "react": {
