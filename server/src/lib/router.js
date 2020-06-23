@@ -5,7 +5,7 @@ const {
   getAvailableMoves,
   validateCordinates,
   validateMove,
-  convertToLetterCoordinates,
+  convertToNumericCoordinates,
 } = require('./utils');
 const { Session } = require('./db/models/session');
 
@@ -25,11 +25,12 @@ const initRouter = (app) => {
         );
     }
 
-    const moves = getAvailableMoves(coordinates);
+    const numericCoordinates = convertToNumericCoordinates(coordinates);
 
-    // This double conversion is probably avoidable
+    const moves = getAvailableMoves(numericCoordinates);
+
     const secondaryMoves = flatten(
-      moves.map((move) => getAvailableMoves(convertToLetterCoordinates(move))),
+      moves.map((move) => getAvailableMoves(move)),
     );
 
     res.send({ moves, secondaryMoves });

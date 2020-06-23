@@ -3,7 +3,7 @@ const { isString } = require('util');
 
 const getAvailableMoves = (coordinates) => {
   //Convert the input to numeric values for easier math
-  const [x, y] = convertToNumericCoordinates(coordinates);
+  const [x, y] = coordinates;
 
   const moves = [
     [x + 1, y + 2],

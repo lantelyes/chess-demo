@@ -69,7 +69,7 @@ describe('Coordinate conversions', () => {
 
 describe('Available Moves Calculation', () => {
   it('Should only return two possibilities if the origin is at the corner of the board', () => {
-    const coordinates = 'A1';
+    const coordinates = [0, 0];
 
     const moves = getAvailableMoves(coordinates);
 
@@ -77,7 +77,7 @@ describe('Available Moves Calculation', () => {
   });
 
   it('Should return four possibilities if the origin is at the middle of an edge of the board', () => {
-    const coordinates = 'C1';
+    const coordinates = [3, 0];
 
     const moves = getAvailableMoves(coordinates);
 
@@ -85,7 +85,7 @@ describe('Available Moves Calculation', () => {
   });
 
   it('Should return eight possibilities if the origin is around the middle of the board', () => {
-    const coordinates = 'C3';
+    const coordinates = [3, 4];
 
     const moves = getAvailableMoves(coordinates);
 
