@@ -32,6 +32,12 @@ export const TUTORIAL_STEPS = [
     target: '#board',
     title: 'Chess Board',
     content:
-      'This is the chessboard, here you can select any space by clicking on it. In order to move the knight, click on the space containing it. Valid moves will be highlighted on the board. Simply click on one of them to move. A blank board means you need to place the knight, to do this, just click on any space.',
+      'This is the chessboard, here you can select any space by clicking on it. In order to move the knight, click on the space containing it. Valid moves will be highlighted on the board with a "1".  Simply click on one of them to move. A blank board means you need to place the knight, to do this, just click on any space.',
+  },
+  {
+    target: '#legend',
+    title: 'Legend',
+    content:
+      'This is the legend, if you need help figureing out what squares represet what, take a look here',
   },
 ];
