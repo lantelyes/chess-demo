@@ -14,12 +14,12 @@ const SessionContext = createContext();
 const useSession = () => useContext(SessionContext);
 
 const SessionProvider = ({ children }) => {
-  //Global session state
+  // Global session state
   const [sessions, setSessions] = useState([]);
   const [currentSession, setCurrentSession] = useState(false);
   const [isFirstMove, setIsFirstMove] = useState(true);
 
-  //Board states
+  // Board states
   const [availableMoves, setAvailableMoves] = useState([]);
   const [availableSecondaryMoves, setAvailableSecondaryMoves] = useState([]);
   const [selectedCoordinates, setSelectedCoordinates] = useState(false);
@@ -29,40 +29,31 @@ const SessionProvider = ({ children }) => {
   const [createSessionModalOpen, setCreateSessionModalOpen] = useState(false);
   const [loadSessionModalOpen, setLoadSessionModalOpen] = useState(false);
 
-  //Create a new session with a given name
+  // Create a new session with a given name
   // Sets the current session in the application state to the new session
-  const createSession = (name, onComplete = () => {}) => {
-    const action = async () => {
-      const response = await axios.post(`/api/sessions/create`, { name });
+  const createSession = async (name) => {
+    const response = await axios.post(`/api/sessions/create`, { name });
 
-      setCurrentSession(response.data);
-      setSelectedCoordinates(false);
-      setKnightCoordinnates(false);
-      setAvailableMoves([]);
-      setAvailableSecondaryMoves([]);
-      setIsFirstMove(true);
-      onComplete();
-    };
-    action();
+    setCurrentSession(response.data);
+    setSelectedCoordinates(false);
+    setKnightCoordinnates(false);
+    setAvailableMoves([]);
+    setAvailableSecondaryMoves([]);
+    setIsFirstMove(true);
   };
 
-  //Load a stored session from the database
+  // Load a stored session from the database
   // Sets the loaded session in the application state to returned session
-  const loadSession = (id, onComplete = () => {}) => {
-    const action = async () => {
-      const response = await axios.get(`/api/sessions/${id}`);
+  const loadSession = async (id) => {
+    const response = await axios.get(`/api/sessions/${id}`);
 
-      setCurrentSession(response.data);
-      const lastPosition = getLatestPostionFromMoves(response.data.moves);
+    setCurrentSession(response.data);
+    const lastPosition = getLatestPostionFromMoves(response.data.moves);
 
-      if (lastPosition) {
-        setKnightCoordinnates(lastPosition);
-        setIsFirstMove(false);
-      }
-
-      onComplete();
-    };
-    action();
+    if (lastPosition) {
+      setKnightCoordinnates(lastPosition);
+      setIsFirstMove(false);
+    }
   };
 
   // Adds a move to the current session, input must be in algebraic notation (eg. C2->D4)
@@ -111,22 +102,22 @@ const SessionProvider = ({ children }) => {
   return (
     <SessionContext.Provider
       value={{
-        //Session state
+        // Session state
         currentSession,
         sessions,
         isFirstMove,
         setIsFirstMove,
 
-        //Session API
+        // Session API
         createSession,
         loadSession,
         addMove,
 
-        //Modals
+        // Modals
         setCreateSessionModalOpen,
         setLoadSessionModalOpen,
 
-        //Board state
+        // Board state
         availableSecondaryMoves,
         availableMoves,
         selectedCoordinates,

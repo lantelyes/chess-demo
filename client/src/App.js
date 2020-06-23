@@ -1,7 +1,8 @@
-import React from 'react';
-import Joyride from 'react-joyride';
 import './theme/bootstrap.min.css';
 import './theme/custom.css';
+
+import React from 'react';
+import Joyride from 'react-joyride';
 
 import { SessionProvider } from './contexts/Session';
 
@@ -12,7 +13,7 @@ import styled from 'styled-components';
 import SessionView from './components/Panels/SessionView';
 
 import { TUTORIAL_STEPS } from './constants';
-import Help from './components/Panels/Legend';
+import Legend from './components/Panels/Legend';
 
 const MainContainer = styled.div`
   display: flex;
@@ -46,12 +47,12 @@ const App = () => (
       }}
     />
     <MainContainer>
-      <ActionBar></ActionBar>
+      <ActionBar />
       <BoardContainer>
         <ChessBoard />
         <SessionView />
       </BoardContainer>
-      <Help />
+      <Legend />
     </MainContainer>
   </SessionProvider>
 );

@@ -18,18 +18,14 @@ const getAvailableMoves = (coordinates) => {
 
   //Filter out invalid moves (ending up off board)
   const validMoves = moves.filter(
-    (move) =>
-      move[0] >= 0 &&
-      move[0] <= BOARD.WIDTH &&
-      move[1] >= 0 &&
-      move[1] <= BOARD.HEIGHT,
+    ([x, y]) => x >= 0 && x <= BOARD.WIDTH && y >= 0 && y <= BOARD.HEIGHT,
   );
 
   return validMoves;
 };
 
 const convertToNumericCoordinates = (coordinates) => {
-  const [column, row] = coordinates.split('');
+  const [column, row] = [...coordinates];
 
   return [COORDINATE_MAP[column], Number(row) - 1];
 };

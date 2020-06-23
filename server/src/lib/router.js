@@ -27,6 +27,7 @@ const initRouter = (app) => {
 
     const moves = getAvailableMoves(coordinates);
 
+    // This double conversion is probably avoidable
     const secondaryMoves = flatten(
       moves.map((move) => getAvailableMoves(convertToLetterCoordinates(move))),
     );
@@ -62,11 +63,11 @@ const initRouter = (app) => {
 
     const { move } = req.body;
 
-    if (!validateMove) {
+    if (!validateMove(move)) {
       res
         .status(500)
         .send(
-          'Invalid move format, must be in algebreaic notation with "->" between the corrdinates (eg. A1->C3',
+          'Invalid move format, must be in algebreaic notation with "->" between the corrdinates (eg. A1->C3)',
         );
     }
 

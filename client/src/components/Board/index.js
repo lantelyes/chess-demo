@@ -6,6 +6,7 @@ import BoardStartMessage from './BoardStartMessage';
 import BoardSquare from './BoardSquare';
 
 import { useSession } from '../../contexts/Session';
+import { BOARD } from '../../constants';
 
 const ChessBoard = () => {
   const {
@@ -16,21 +17,18 @@ const ChessBoard = () => {
 
   const [board, setBoard] = useState(null);
 
-  //Generate a 2d array of squares to represent the board, and store it in the component state
+  //Generate a 2D array of squares to represent the board, and store it in the component state
   useEffect(() => {
     const board = [];
 
-    for (let i = 7; i >= 0; i--) {
+    for (let i = BOARD.HEIGHT - 1; i >= 0; i--) {
       const row = [];
 
-      for (let j = 0; j < 8; j++) {
+      for (let j = 0; j < BOARD.WIDTH; j++) {
         const coordinates = [i, j];
 
         row.push(
-          <BoardSquare
-            key={`square-${i}-${j}`}
-            coordinates={coordinates}
-          ></BoardSquare>,
+          <BoardSquare key={`square-${i}-${j}`} coordinates={coordinates} />,
         );
       }
 

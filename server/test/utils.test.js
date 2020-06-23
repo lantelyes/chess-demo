@@ -68,7 +68,7 @@ describe('Coordinate conversions', () => {
 });
 
 describe('Available Moves Calculation', () => {
-  it('Should only return two possibilities if the origin is ar the corner of the board', () => {
+  it('Should only return two possibilities if the origin is at the corner of the board', () => {
     const coordinates = 'A1';
 
     const moves = getAvailableMoves(coordinates);

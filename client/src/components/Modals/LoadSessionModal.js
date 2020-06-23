@@ -63,7 +63,9 @@ const LoadSessionModal = ({ show, onClose }) => {
                   <td>{session.name}</td>
                   <HideTdOnMobile>{session.moves.length}</HideTdOnMobile>
                   <td>
-                    {session.moves.length ? session.moves.slice(-1)[0] : 'None'}
+                    {session.moves.length
+                      ? session.moves[session.moves.length - 1]
+                      : 'None'}
                   </td>
                 </tr>
               ))}
@@ -76,7 +78,10 @@ const LoadSessionModal = ({ show, onClose }) => {
       <Modal.Footer>
         <Button
           variant="secondary"
-          onClick={() => loadSession(selectedSessionId, onClose)}
+          onClick={async () => {
+            await loadSession(selectedSessionId);
+            onClose();
+          }}
           disabled={!selectedSessionId}
         >
           Load

@@ -16,9 +16,10 @@ const CreateSessionModal = ({ show, onClose }) => {
       </Modal.Header>
 
       <Form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          createSession(name, onClose);
+          await createSession(name);
+          onClose();
         }}
       >
         <Modal.Body>
