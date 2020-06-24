@@ -1,6 +1,6 @@
 # Chess Demo
 
-live site: https://aestudio-chess.herokuapp.com/
+Live site: https://aestudio-chess.herokuapp.com/
 
 ## Frameworks/Libraries
 - **Server:** NodeJS
