@@ -19,7 +19,7 @@ The file structure of this project is split into two seperate node projects, one
 The server is broken down into two folders:
 1)  **Source**
 The `src` folder contains the constants file, the entry point, and the libary folder. The library folder contains the following:
-	- **Database:** This contains the database connection code, as well as the schemas used
+	- **Database:** This folder contains the database connection code, as well as the schemas used
 	- **Router:** This contains all of the servers routing logic 
 	- **Utilities:** This contails various helpers, and cooordinate conversion functions used througout the server code base
 2) **Tests**
@@ -49,14 +49,12 @@ The `cypress` folder contains all of the code pertaining to integration browser 
 The `public` folder contains static assets, such as `index.html`, favicons and the mannifest json
 
 
-
-
 ## The Knight Algorithm
-The algoritm used for calculating all of the knights first, and second possible moves is fariy simple:
+The algorithm used for calculating all of the knights first, and second possible moves is fariy simple:
 
-1) Generate possible moves from a given [x,y] coordinate on the board using the rules of the chess peice
+1) Generate possible moves from a given coordinate on the board using the rules of the chess peice
 3) Filter the results of any that would land off of the board - this results in all possible first moves
-2) For each of the resulting positions, repeat step 1, and flatten all of the results into one list of possible coordinates - these are your possible second moves
+2) For each of the resulting positions, repeat step 1 and 2, then and flatten all of the results into one list of possible coordinates - these are your possible second moves
 
 
 ## Postmortem
@@ -74,7 +72,7 @@ There are however some things I would add/improve if I had more time:
 4) Various smaller optimizations and cleaner ways to write things
 5) More verbose, complete comments throughout the code
 6) CI integration with Heroku deployment
-7) Review appa for pull requests
+7) Review apps for pull requests
 
 
 On a final note, I fully understand in a collaberate project, GitHub would be used by creating feature/fix branches, that would then be reviewed as pull requests.
