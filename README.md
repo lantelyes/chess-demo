@@ -1,13 +1,13 @@
 # Chess Demo
 
-live site: https://aestudio-chess.herokuapp.com/
+Live site: https://aestudio-chess.herokuapp.com/
 
 ## Frameworks/Libraries
-**Server:** NodeJS
-**Database:** MongoDB (Mongoose node driver)
-**Routing:** Express
-**UI Framework:** React / Create React App / Bootstrap
-**Testing:** Jest / Cypress
+- **Server:** NodeJS
+- **Database:** MongoDB (Mongoose node driver)
+- **Routing:** Express
+- **UI Framework:** React / Create React App / Bootstrap
+- **Testing:** Jest / Cypress
 
 
 ## Organization 
