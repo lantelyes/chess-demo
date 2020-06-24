@@ -18,7 +18,7 @@ export const TUTORIAL_STEPS = [
   {
     target: '#action-bar',
     content:
-      'This is the action panel, here you can create a new session, or load a previous one. Your move history will be stored per session and can be viewed in the session view panel',
+      'This is the action panel, here you can create a new session, or load a previous one. Your move history will be stored per session and the in progre session can be viewed in the session panel.',
     disableBeacon: true,
     title: 'Actions',
   },
@@ -26,7 +26,7 @@ export const TUTORIAL_STEPS = [
     target: '#session-view',
     title: 'Sessions',
     content:
-      'This is the session panel. Your move history for your current session will be shown here. most recent moves will be at the bottom',
+      'This is the session panel. Your move history for your current session will be shown here. Most recent moves will be at the bottom of the list.',
   },
   {
     target: '#board',
@@ -38,6 +38,6 @@ export const TUTORIAL_STEPS = [
     target: '#legend',
     title: 'Legend',
     content:
-      'This is the legend, if you need help figureing out what squares represet what, take a look here',
+      'This is the legend, if you need help figureing out what squares represet what, take a look here.',
   },
 ];
