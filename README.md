@@ -1,4 +1,4 @@
-# AE.Studio Chess Demo
+# Chess Demo
 
 live site: https://aestudio-chess.herokuapp.com/
 
