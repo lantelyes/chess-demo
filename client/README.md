@@ -54,3 +54,19 @@ The algoritm used for calculating all of the knights first, and second possible 
 1) Generate possible moves from a given [x,y] coordinate on the board using the rules of the chess peice
 3) Filter the results of any that would land off of the board - this results in all possible first moves
 2) For each of the resulting positions, repeat step 1, and flatten all of the results into one list of possible coordinates - these are your possible second moves
+
+
+## Postmortem
+I really liked this challenge. It was a good balence of frontend and backend work. Feeling inspired, I decided to implement some more advanced features:
+
+1) Fully responsive design
+2) Session saving and loading to record move history
+3) A responsive interactive tutorial, rather than a responsive wizard page
+
+There are however some things I would add/improve if I had more time:
+
+1) Complete unit test coverage
+2) Error handing middleware for express routing
+3) Algoritm optimization (eg. avoiding duplicate resulting coordinates)
+4) Various smaller optimizations and cleaner ways to write things
+5) More verbose, complete comments throughout the code
