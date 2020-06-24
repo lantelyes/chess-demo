@@ -21,7 +21,8 @@
     "start": "nodemon src/index.js",
     "test": "jest",
     "lint": "yarn eslint .",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "lint-fix": "yarn eslint . --fix"
   },
   "author": "",
   "license": "ISC",
