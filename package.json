@@ -18,7 +18,7 @@
     "lint": "concurrently \"yarn lint-server\" \"yarn lint-client\"",
     "lint-server": "cd server && yarn lint",
     "lint-client": "cd client && yarn lint",
-    "lint-fix": "concurrently \"yarn lint-server\" \"yarn lint-client\"",
+    "lint-fix": "concurrently \"yarn lint-fix-server\" \"yarn lint-fix-client\"",
     "lint-fix-server": "cd server && yarn lint-fix",
     "lint-fix-client": "cd client && yarn lint-fix",
     "heroku-postbuild": "cd client && yarn build",
