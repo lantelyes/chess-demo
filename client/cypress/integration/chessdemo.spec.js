@@ -12,7 +12,9 @@ describe('Main Page', () => {
   });
 
   it('Should skip the the initial tutorial, and hide it', () => {
-    cy.get('[style="align-items: center; display: flex; justify-content: flex-end; margin-top: 15px;"] > div > button').click(); //Selector for skip button
+    cy.get(
+      '[style="align-items: center; display: flex; justify-content: flex-end; margin-top: 15px;"] > div > button',
+    ).click(); //Selector for skip button
     cy.get('.react-joyride__spotlight').should('not.be.visible');
     cy.get('.react-joyride__tooltip').should('not.be.visible');
   });
