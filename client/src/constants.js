@@ -18,7 +18,7 @@ export const TUTORIAL_STEPS = [
   {
     target: '#action-bar',
     content:
-      'This is the action panel, here you can create a new session, or load a previous one. Your move history will be stored per session and the in progrsse session can be viewed in the session panel.',
+      'This is the action panel, here you can create a new session, or load a previous one. Your move history will be stored per session and the in progress session can be viewed in the session panel.',
     disableBeacon: true,
     title: 'Actions',
   },
