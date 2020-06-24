@@ -1,68 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# AE.Studio Chess Demo
 
-## Available Scripts
+## Frameworks/Libraries
+**Database:** MongoDB (Mongoose node driver)
+**Routing:** Express
+**UI Framework:** React / Create React App / Bootstrap
+**Testing:** Jest / Cypress
 
-In the project directory, you can run:
 
-### `yarn start`
+## Organization 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### File Structure
+The file structure of this project is split into two seperate node projects, one for the. server, and one for the client. Due to the small size of the application, they are both in the same repository. the root directory is a small node project as well. It serves to manage deployment to heroku, as well as scripts to aid in development
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### Server
+The server is broken down into two folders:
+1)  **Source**
+The `src` folder contains the constants file, the entry point, and the libary folder. The library folder contains the following:
+	- **Database:** This contains the database connection code, as well as the schemas used
+	- **Router:** This contains all of the servers routing logic 
+	- **Utilities:** This contails various helpers, and cooordinate conversion functions used througout the server code base
+2) **Tests**
+ The `test` folder contains unit tests for the server - right now there are only a few written for the knight movement algorithm, and validation of the coordinate formats. Ideally, there would be. much more complete code coverage.
 
-### `yarn test`
+#### Client
+The client folder contains the main app entry point: `App.js` as well as various scripts used to set up the runtime environment. In addition it contains `utils.js` with various helpers and other functions used throught the client code base. The sub directories are broken down into three folders:
+1) **Source**
+The `src` folder contains all of the client code: It it broken down into the folowing three folders:
+	-  **Components**: 
+This folder contains all of the react components and is broken down into three sub folders:
+		- **Board:** All compoments used to build the chessboard
+		- **Panels:** All the panels in the UI for displaying information, or for user actions
+		- **Modals:** The modals used to perform the user actions.
+	- **Contexts:**
+This folder contains the context used to manage the application state
+	- **Theme:**
+This folder contains the bootstrap theme css as well as some custom overrides
+2) **Cypress**:
+The `cypress` folder contains all of the code pertaining to integration browser tests, It it broken down into the folowing:
+	- **Fixtures:** These are where mocks and test fixtures would go to support integration tests - it is not used in this project
+	- **Integration:** These are where the integration tests are - there is only a very basic one in here, I mainly wanted to show how I know how to set up the system
+	- 	**Plugins:** These are where cypress plugins would go if they are used
+	-	**Support:** These are where cypress helpers would go, such as custom commands
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3) **Public**
+The `public` folder contains static assets, such as `index.html`, favicons and the mannifest json
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## The Knight Algorithm
+The algoritm used for calculating all of the knights first, and second possible moves is fariy simple:
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1) Generate possible moves from a given [x,y] coordinate on the board using the rules of the chess peice
+3) Filter the results of any that would land off of the board - this results in all possible first moves
+2) For each of the resulting positions, repeat step 1, and flatten all of the results into one list of possible coordinates - these are your possible second moves
