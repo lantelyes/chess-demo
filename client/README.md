@@ -1,5 +1,7 @@
 # AE.Studio Chess Demo
 
+live site: https://aestudio-chess.herokuapp.com/
+
 ## Frameworks/Libraries
 **Database:** MongoDB (Mongoose node driver)
 **Routing:** Express
@@ -70,3 +72,10 @@ There are however some things I would add/improve if I had more time:
 3) Algoritm optimization (eg. avoiding duplicate resulting coordinates)
 4) Various smaller optimizations and cleaner ways to write things
 5) More verbose, complete comments throughout the code
+6) CI integration with Heroku deployment
+7) Review appa for pull requests
+
+
+On a final note, I fully understand in a collaberate project, GitHub would be used by creating feature/fix branches, that would then be reviewed as pull requests.
+
+I opted just to commit to master for the sake of the smallness of the project, and the fact that I am the only contributer.
